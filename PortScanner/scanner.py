@@ -26,13 +26,16 @@ for num in octets:
 
 
 def scanner(ip):
-    ports = input("Enter the port or port range to scan (Ex. 80 or 1-1000: ")
+    ports = input("Enter the port or port range to scan (Ex. 80 or 1-1000): ")
 
-    if ports.count('-') == 1:
-        for port in range(int(ports.split('-')[0]), int(ports.split('-')[1])+1):
-            print("Scanning {0}:{1}".format(ip, port))
-    elif int(ports) >= 0 and int(ports) <= 65535:
-        print("Scanning {0}:{1}".format(ip, ports))
+    try:
+        if ports.count('-') == 1:
+            for port in range(int(ports.split('-')[0]), int(ports.split('-')[1])+1):
+                print("Scanning {0}:{1}".format(ip, port))
+        elif int(ports) >= 0 and int(ports) <= 65535:
+            print("Scanning {0}:{1}".format(ip, ports))
+    except ValueError:
+        print("Invalid input, please enter a valid number.")
 
 
 scanner(target)
