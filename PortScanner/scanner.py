@@ -18,11 +18,10 @@ if target.count('.') != 3:
     bye()
 else:
     octets = target.split('.')
-
-for num in octets:
-    numInt = int(num)
-    if numInt <= 0 or numInt > 255:
-        bye()
+    for num in octets:
+        numInt = int(num)
+        if numInt <= 0 or numInt > 255:
+            bye()
 
 
 def scanner(ip):
@@ -32,10 +31,14 @@ def scanner(ip):
         if ports.count('-') == 1:
             for port in range(int(ports.split('-')[0]), int(ports.split('-')[1])+1):
                 print("Scanning {0}:{1}".format(ip, port))
-        elif int(ports) >= 0 and int(ports) <= 65535:
+        elif 0 <= int(ports) <= 65535:
             print("Scanning {0}:{1}".format(ip, ports))
+        else:
+            print("Invalid port number entered. Please enter a valid number.")
+            scanner(target)
     except ValueError:
         print("Invalid input, please enter a valid number.")
+        scanner(target)
 
 
 scanner(target)
